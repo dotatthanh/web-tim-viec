@@ -1,0 +1,47 @@
+/*
+* @Author: Trungnn
+* @Date:   2018-10-16 06:46:55
+* @Last Modified by:   Trungnn
+* @Last Modified time: 2018-10-21 07:25:54
+*/
+.info-job-basic{
+	font-size:15px;margin-top:20px;
+}
+
+.info-job-basic span{
+	color:red
+}
+.info-job-quick{
+	font-size:25px;
+	margin-bottom: 20px;	
+}
+.info-job-quick div{
+	font-size:15px;
+	
+}
+.info-job-descripton{
+	font-size:25px;
+	margin-top:150px;
+
+}
+.info-job-descripton div{
+	font-size:15px;
+}
+
+.info-job-benefit{
+	font-size:25px;
+	margin-top:40px;
+
+}
+.info-job-benefit div{
+	font-size:15px;
+}
+
+.info-job-other_requirement{
+	font-size:25px;
+	margin-top:40px;
+
+}
+.info-job-other_requirement div{
+	font-size:15px;
+}
