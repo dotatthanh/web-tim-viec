@@ -36,54 +36,12 @@ class JobController extends Controller
 	}
 
 	public function searchJob(Request $request){
-		// $listCategory = Category::all();
-		// if($request->address == '' && $request->category == ''){
-		// 	$jobs = JobSummary::selectRaw('job_summaries.*')
-		// 	->join('companies','companies.id','=','job_summaries.company_id')
-		// 	->where('companies.name','like','%'.$request->company.'%')
-		// 	->orderBy('id','DESC')
-		// 	->paginate(5);
-
-		// }
-		// else if($request->address != '' && $request->category == ''){
-		// 	$addr = (int)$request->address;
-		// 	$jobs = JobSummary::selectRaw('job_summaries.*')
-		// 	->join('companies','companies.id','=','job_summaries.company_id')
-		// 	->join('address','address.id','=','job_summaries.address_id')
-		// 	->where([['companies.name','like','%'.$request->company.'%'],['address.id','=',$addr]])
-		// 	->orderBy('id','DESC')
-		// 	->paginate(5);
-		// }
-		// else if($request->address == '' && $request->category != ''){
-		// 	$cate = (int)$request->category;
-		// 	$jobs = JobSummary::selectRaw('job_summaries.*')
-		// 	->join('companies','companies.id','=','job_summaries.company_id')
-		// 	->join('categories','categories.id','=','job_summaries.category_id')
-		// 	->where([['companies.name','like','%'.$request->company.'%'],['categories.id','=',$cate]])
-		// 	->orderBy('id','DESC')
-		// 	->paginate(5);
-		// }
-		// else {
-		// 	$addr = (int)$request->address;
-		// 	$cate = (int)$request->category;
-		// 	$jobs = JobSummary::selectRaw('job_summaries.*')
-		// 	->join('companies','companies.id','=','job_summaries.company_id')
-		// 	->join('categories','categories.id','=','job_summaries.category_id')
-		// 	->join('address','address.id','=','job_summaries.address_id')
-		// 	->where([['companies.name','like','%'.$request->company.'%'],['categories.id','=',$cate],['address.id','=',$addr]])
-		// 	->orderBy('id','DESC')
-		// 	->paginate(5);
-		// }
-
-		
-		// $listAddress = Address::all();
-		// return view('users.search-resume',['jobs'=>$jobs,'active_job'=>true,'listCategory'=>$listCategory,'listAddress'=>$listAddress,'companySearch'=>$request->company]);
-
 		$listAddress = Address::all();
 		$listCategory = Category::all();
 		$notifications = [];
 		if (auth()->user()) {
 			$notifications = auth()->user()->unreadNotifications;
+			$request['user_id'] = auth()->id();
 		}
 
 

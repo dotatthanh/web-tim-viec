@@ -347,12 +347,13 @@ class UserController extends Controller
 
 	public function jobSuggestBySearch() {
 		$jobs = JobSummary::query();
-		$dataSearch = Search::orderBy('id', 'desc')->limit(5)->get();
+		$dataSearch = Search::where('user_id', null)->orderBy('id', 'desc')->limit(5)->get();
 		$arrIds = [];
 		$tmp = [];
 		$user = auth()->user();
 
 		if ($user && $user->status == 1) { // Dang tim viec
+			$dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->limit(5)->get();
 			$jobSuggestByProfile = JobSummary::where('title', 'like', '%' . $user->career . '%')
 				->orderBy('id', 'desc')
 				->take(5)
@@ -363,36 +364,71 @@ class UserController extends Controller
 			}
 		}
 
-		foreach ($dataSearch as $item) {
-			if (isset($item->company)) {
-				$jobs = $jobs->whereHas('company', function ($query) use($item) {
-					$query->where('name', 'like', '%'.$item->company.'%');
-				});
-			}
-	
-			if (isset($item->category)) {
-				$jobs = $jobs->where('category_id', $item->category);
-			}
-	
-			if (isset($item->address)) {
-				$jobs = $jobs->where('address_id', $item->address);
-			}
-	
-			if (isset($item->salary)) {
-				$jobs = $jobs->whereHas('detail', function ($query) use($item) {
-					$query->where('salary', 'like', '%'.$item->salary.'%');
-				});
-			}
-	
-			if (isset($item->experience)) {
-				$jobs = $jobs->whereHas('detail', function ($query) use($item) {
-					$query->where('experience', 'like', '%'.$item->experience.'%');
-				});
-			}
+		if ($dataSearch->count() > 0) {
+			foreach ($dataSearch as $item) {
+				// Search theo công ty
+				if (isset($item->company)) {
+					$jobs = $jobs->whereHas('company', function ($query) use($item) {
+						$query->where('name', 'like', '%'.$item->company.'%');
+					});
+				}
+			
+				// Search theo nghề
+				if ($user && $user->status == 1 && isset($item->category)) {
+					$jobs = $jobs->where('category_id', $item->category);
+				}
+				elseif ($user && $user->status == 1) {
+					$jobs = $jobs->where('category_id', $user->profile->category_id);
+				}
+				
+				// Search theo địa chỉ
+				if ($user && $user->status == 1 && isset($item->address)) {
+					$jobs = $jobs->where('address_id', $item->address);
+				}
+				elseif ($user && $user->status == 1) {
+					$jobs = $jobs->where('address_id', $user->profile->address_id);
+				}
 
-			$tmp[] = $jobs->get();
+				// Search theo mức lương
+				if (isset($item->salary)) {
+					$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+						$query->where('salary', 'like', '%'.$item->salary.'%');
+					});
+				}
+				
+				// Search theo kinh nghiệm
+				if ($user && $user->status == 1 && isset($item->experience)) {
+					$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+						$query->where('experience', 'like', '%'.$item->experience.'%');
+					});
+				}
+				elseif ($user && $user->status == 1) {
+					$jobs = $jobs->whereHas('detail', function ($query) use($user) {
+						$query->where('experience', 'like', '%'.$user->profile->experience.'%');
+					});
+				}
+			}
+		}
+		else {
+			// Search theo nghề
+			if ($user && $user->status == 1) {
+				$jobs = $jobs->where('category_id', $user->profile->category_id);
+			}
+			
+			// Search theo địa chỉ
+			if ($user && $user->status == 1) {
+				$jobs = $jobs->where('address_id', $user->profile->address_id);
+			}
+			
+			// Search theo kinh nghiệm
+			if ($user && $user->status == 1) {
+				$jobs = $jobs->whereHas('detail', function ($query) use($user) {
+					$query->where('experience', 'like', '%'.$user->profile->experience.'%');
+				});
+			}
 		}
 
+		$tmp[] = $jobs->get();
 		foreach ($tmp as $item) {
 			foreach ($item as $value) {
 				$arrIds[] = $value->id;
