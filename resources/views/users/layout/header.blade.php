@@ -96,7 +96,7 @@
                                             Đổi thông tin
                                         </a>
                                     </li>
-                                    @if (Auth::user()->role_id < 3)
+                                    @if (Auth::user()->role_id == 2)
 
                                     <li>
                                         <a href="{{ route('my-recruit') }}">

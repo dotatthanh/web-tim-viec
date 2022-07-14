@@ -82,6 +82,7 @@
                         <hr>
                         <form class="form-horizontal" name="signup" id="signup" >
                             <div class="form-group">
+                                @if (Auth::user()->role_id == 3)
                                 <label class="control-label col-md-3">
                                     Trạng thái tìm việc
                                     <span class="text-danger">*</span>
@@ -98,6 +99,7 @@
                                         </label>
                                     </div>    
                                 </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">Loại tài khoản <span class="text-danger">*</span></label>

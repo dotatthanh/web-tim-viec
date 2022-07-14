@@ -25,14 +25,14 @@
             <div class="row">
                 <div class="touch-slider" class="owl-carousel owl-theme">
                     <div class="item text-center">
-                        <img class="img-member" src="user_assets/img/clients/Tho.jpg" alt="">
+                        <img class="img-member" src="user_assets/img/clients/viet_anh.jpg" alt="">
                         <div class="client-info">
-                            <h2 class="client-name">NGUYỄN VIỆT ANH <br>
-                                <span>(Jak Nguyen)</span>
+                            <h2 class="client-name">Đào Đức Thiện <br>
+                                <span>(Shadow Monarch)</span>
                             </h2>
                         </div>
                         <p>
-                            <i class="fa fa-quote-left quote-left"></i> Hallo Daisy!
+                            <i class="fa fa-quote-left quote-left"></i> A have nice day!!!
                             <i class="fa fa-quote-right quote-right"></i>
                         </p>
                     </div>
@@ -54,24 +54,24 @@
         </h2>
         <div class="row">
             <div id="clients-scroller">
-                <div class="items">
+                <a target="_blank" href="https://vingroup.net/" class="items">
                     <img src="user_assets/img/clients/img1.png" alt="">
-                </div>
-                <div class="items">
+                </a>
+                <a target="_blank" href="https://fpt.com.vn/vi" class="items">
                     <img src="user_assets/img/clients/img2.png" alt="">
-                </div>
-                <div class="items">
+                </a>
+                <a target="_blank" href="https://www.masangroup.com/vi" class="items">
                     <img src="user_assets/img/clients/img3.png" alt="">
-                </div>
-                <div class="items">
+                </a>
+                <a target="_blank" href="https://www.samsung.com/vn/about-us/company-info/" class="items">
                     <img src="user_assets/img/clients/img4.png" alt="">
-                </div>
-                <div class="items">
+                </a>
+                <a target="_blank" href="https://viettel.com.vn/vi/" class="items">
                     <img src="user_assets/img/clients/img5.png" alt="">
-                </div>
-                <div class="items">
+                </a>
+                <a target="_blank" href="https://unikgroup.vn/" class="items">
                     <img src="user_assets/img/clients/img6.png" alt="">
-                </div>
+                </a>
             </div>
         </div>
     </div>

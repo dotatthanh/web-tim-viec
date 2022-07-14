@@ -33,7 +33,10 @@ class UserController extends Controller
 		$listCategory = Category::all();
 		$listAddress = Address::all();
 		
-		$jobSuggests = $this->jobSuggestBySearch();
+		if (auth()->user() && auth()->user()->role_id == 3)
+			$jobSuggests = $this->jobSuggestBySearch();
+		else
+			$jobSuggests = [];
 
 		$dataView = [
 			'notifications' => $notifications,
@@ -354,14 +357,14 @@ class UserController extends Controller
 
 		if ($user && $user->status == 1) { // Dang tim viec
 			$dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->limit(5)->get();
-			$jobSuggestByProfile = JobSummary::where('title', 'like', '%' . $user->career . '%')
-				->orderBy('id', 'desc')
-				->take(5)
-				->get();
+			// $jobSuggestByProfile = JobSummary::where('title', 'like', '%' . $user->career . '%')
+			// 	->orderBy('id', 'desc')
+			// 	->take(5)
+			// 	->get();
 
-			foreach ($jobSuggestByProfile as $item) {
-				$arrIds[] = $item->id;
-			}
+			// foreach ($jobSuggestByProfile as $item) {
+			// 	$arrIds[] = $item->id;
+			// }
 		}
 
 		if ($dataSearch->count() > 0) {
@@ -428,13 +431,12 @@ class UserController extends Controller
 			}
 		}
 
-		$tmp[] = $jobs->get();
-		foreach ($tmp as $item) {
-			foreach ($item as $value) {
-				$arrIds[] = $value->id;
-			}
-		}
+		foreach ($jobs->get() as $item) {
+			$arrIds[] = $item->id;
+		}	
+
 		$jobIds = array_unique(array_values($arrIds));
+
 		$jobs = JobSummary::whereIn('id', $jobIds)->limit(15)->get();
 
 		return $jobs;

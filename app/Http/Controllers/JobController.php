@@ -169,6 +169,7 @@ class JobController extends Controller
 	}
 
 	public function saveDataSearch($params) {
+		$params['company_name'] = $params['company'];
 		Search::create($params);
 		return '';
 	}

@@ -16,7 +16,10 @@
               <h3 class="block-title">Nhà phát triển</h3>
               <ul class="menu">
                 <li>
-                  <a href="https://www.facebook.com/KwonYongBin" target="_blank">Nguyen Dinh Tho</a>
+                  <a href="https://www.facebook.com/profile.php?id=100030011672272" target="_blank">Đào Đức Thiện</a>
+                </li>
+                <li>
+                  <a href="tel:0343288856">Liên hệ: 0343288856</a>
                 </li>
               </ul>
             </div>
@@ -84,7 +87,7 @@
             <div class="site-info text-center">
               Developer
               <i class="fa fa-love"></i>
-              <a href="https://github.com/oorochimaru">HEDSPI - K59</a>
+              <a href="javascript:void(0)">HEDSPI – K62</a>
             </div>
           </div>
         </div>
