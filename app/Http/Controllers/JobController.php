@@ -142,8 +142,8 @@ class JobController extends Controller
 		$jobDetail->position = $request->position;
 		$jobDetail->gender = $request->gender;
 		$jobDetail->age = $request->age;
-		$jobDetail->expiration_date = $request->expiration_date;
-		$jobDetail->job_description = $request->job_description;
+		$jobDetail->expiration_date = date('d/m/Y', strtotime($request->date));
+		$jobDetail->job_description = $request->detail;
 		$jobDetail->benefit = $request->benefit;
 		$jobDetail->other_requirement = $request->other_requirement;
 		$jobDetail->save();

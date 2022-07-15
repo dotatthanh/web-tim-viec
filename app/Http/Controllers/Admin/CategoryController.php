@@ -48,10 +48,9 @@ class CategoryController extends Controller
 	}
 
 	public function destroy($id) {
-		
-		$jobSumaries = 	JobSummary::where("category_id","=",$id)->get();
+		$jobSummaries = JobSummary::where("category_id","=",$id)->get();
 		if($jobSummaries->count()>0){
-			foreach ($jobSumaries as $jobSummary) {
+			foreach ($jobSummaries as $jobSummary) {
 				$jobDetail = $jobSummary->detail();
 				$jobDetail->delete();
 				$jobSummary->delete();
