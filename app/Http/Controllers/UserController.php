@@ -356,7 +356,8 @@ class UserController extends Controller
 		$user = auth()->user();
 
 		if ($user && $user->status == 1) { // Dang tim viec
-			$dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->limit(5)->get();
+			// $dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->limit(5)->get();
+			$dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->first()->toArray();
 			// $jobSuggestByProfile = JobSummary::where('title', 'like', '%' . $user->career . '%')
 			// 	->orderBy('id', 'desc')
 			// 	->take(5)
