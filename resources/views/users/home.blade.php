@@ -55,22 +55,22 @@
         <div class="row">
             <div id="clients-scroller">
                 <a target="_blank" href="https://vingroup.net/" class="items">
-                    <img src="user_assets/img/clients/img1.png" alt="">
+                    <img src="user_assets/img/clients/logo-vin.png" alt="">
                 </a>
                 <a target="_blank" href="https://fpt.com.vn/vi" class="items">
-                    <img src="user_assets/img/clients/img2.png" alt="">
+                    <img src="user_assets/img/clients/fpt.png" alt="">
                 </a>
                 <a target="_blank" href="https://www.masangroup.com/vi" class="items">
-                    <img src="user_assets/img/clients/img3.png" alt="">
+                    <img src="user_assets/img/clients/masan.jpg" alt="">
                 </a>
                 <a target="_blank" href="https://www.samsung.com/vn/about-us/company-info/" class="items">
-                    <img src="user_assets/img/clients/img4.png" alt="">
+                    <img src="user_assets/img/clients/sam-sung.png" alt="">
                 </a>
                 <a target="_blank" href="https://viettel.com.vn/vi/" class="items">
-                    <img src="user_assets/img/clients/img5.png" alt="">
+                    <img src="user_assets/img/clients/logo-viettel.png" alt="">
                 </a>
                 <a target="_blank" href="https://unikgroup.vn/" class="items">
-                    <img src="user_assets/img/clients/img6.png" alt="">
+                    <img src="user_assets/img/clients/UNIK_Logo.png" alt="">
                 </a>
             </div>
         </div>
