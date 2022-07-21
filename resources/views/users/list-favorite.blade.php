@@ -23,7 +23,7 @@
 					<td>{{ $favorite->company->name }}</td>
 					<td>
 						<a href="/job-detail/{{ $favorite->id }}"><span class="label label-success">Chi tiết</span></a>
-						<span class="label label-warning delete" id="{{ $favorite->id }}" style="cursor:pointer" onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</span>
+						<span class="label label-warning delete" id="{{ $favorite->id }}" style="cursor:pointer" onclick="deleteFavorite({{ $favorite->id }})">Xóa</span>
 					</td>
 				</tr>
 				@endforeach
@@ -45,9 +45,9 @@
 </section>
 <!-- Find Job Section End -->
 <script type="text/javascript" src="user_assets/js/jquery-min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('.delete').click(function(event) {
+<script type="text/javascript">
+	function deleteFavorite(id) {
+		if (confirm("Bạn có chắc chắn muốn xóa") == true) {
 			/* Act on the event */
 			$.ajaxSetup({
 				headers: {
@@ -57,7 +57,7 @@
 			$.ajax({
 				'url': '/delete-job-favorite',
 				'type': 'delete',
-				'data': {'idJob': $(this).attr('id')},
+				'data': {'idJob': id},
 				success:function(data){
 					if(data.message == true){
 						$('#tr'+data.idJob).remove();
@@ -65,7 +65,7 @@
 					
 				}
 			})
-		});  
-	});
+		}
+	}
 </script>
 @endsection
