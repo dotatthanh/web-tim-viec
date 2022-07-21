@@ -50,7 +50,7 @@
                                     @foreach ($listCategory as $value)
                                     {{-- expr --}}
                                     <li class="rd-megamenu-item col-xs-3" style="margin-bottom: 10px">
-                                        <h6 class="rd-megamenu-title"><a href="/category/{{$value->id}}" style="color: white">{{ $value->name }}</a></h6>
+                                        <h6 class="rd-megamenu-title"><a href="/category/{{$value->id}}">{{ $value->name }}</a></h6>
                                     </li>
                                     @endforeach
                                     @endif

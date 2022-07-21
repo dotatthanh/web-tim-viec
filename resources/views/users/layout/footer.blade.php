@@ -4,14 +4,14 @@
     <section class="footer-Content">
       <div class="container">
         <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="widget">
               <h3 class="block-title">
                 <img src="user_assets/img/logo.png" class="img-responsive" alt="Footer Logo">
               </h3>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="widget">
               <h3 class="block-title">Nhà phát triển</h3>
               <ul class="menu">
@@ -24,7 +24,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="widget">
               <h3 class="block-title">Nghề nghiệp hot</h3>
               <ul class="menu">
@@ -46,7 +46,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          {{-- <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="widget">
               <h3 class="block-title">Mạng xã hội</h3>
               <div class="bottom-social-icons social-icon">
@@ -73,7 +73,7 @@
                 <input type="submit" class="btn-system" value="Search">
               </form>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </section>

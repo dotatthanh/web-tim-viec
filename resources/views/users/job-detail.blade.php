@@ -43,7 +43,13 @@
 								<b>Thông tin tuyển dụng nhanh</b><hr>
 
 								<div class="col-sm-6" style=""><b>Kinh nghiệm: </b><span>{{ $jobSummary->detail->experience}}</span></div>
-								<div class="col-sm-6" ><b>Giới tính: </b><span>{{ $jobSummary->detail->gender}}</span></div>
+								<div class="col-sm-6" ><b>Giới tính: </b><span>
+									@if ($jobSummary->detail->gender == 1)
+										Nam
+									@elseif ($jobSummary->detail->gender == 2)
+										Nữ
+									@endif
+								</span></div>
 								<div class="col-sm-6" ><b>Bằng cấp: </b><span>{{ $jobSummary->detail->education}}</span></div>
 								<div class="col-sm-6" ><b>Chức vụ: </b><span>{{ $jobSummary->detail->position}}</span></div>
 								<div class="col-sm-6" ><b>Số lượng cần tuyển: </b><span>{{ $jobSummary->detail->quantity}}</span></div>

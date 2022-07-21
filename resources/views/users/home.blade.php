@@ -9,14 +9,14 @@
                 @include('users.includes.job-item', ['value' => $value])
             @endforeach
         </div>
-        @if (isset($jobSuggests) && count($jobSuggests) > 0)
+        {{-- @if (isset($jobSuggests) && count($jobSuggests) > 0) --}}
             <div class="container">
                 <h2 class="section-title">Công việc gợi ý dành cho bạn</h2>
                 @foreach ($jobSuggests as $value)
                     @include('users.includes.job-item', ['value' => $value])
                 @endforeach
             </div>
-        @endif
+        {{-- @endif --}}
     </section>
     <!-- Find Job Section End -->
     <!-- Testimonial Section Start -->

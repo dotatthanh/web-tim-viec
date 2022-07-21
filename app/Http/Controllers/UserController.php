@@ -33,10 +33,10 @@ class UserController extends Controller
 		$listCategory = Category::all();
 		$listAddress = Address::all();
 		
-		if (auth()->user() && auth()->user()->role_id == 3)
+		// if (auth()->user() && auth()->user()->role_id == 3)
 			$jobSuggests = $this->jobSuggestBySearch();
-		else
-			$jobSuggests = [];
+		// else
+		// 	$jobSuggests = [];
 
 		$dataView = [
 			'notifications' => $notifications,

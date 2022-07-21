@@ -117,7 +117,7 @@
       </div>
       <div class="form-group required col-xs-12 col-sm-4">
         <label for="exampleInputPassword1" class='control-label'>Tuổi</label>
-        <input type="number" class="form-control" id="age" name="age" min=18 required>
+        <input type="text" class="form-control" id="age" name="age" min="18" required>
       </div>
       <div class="form-group required col-xs-12 col-sm-4">
         <label for="exampleInputPassword1" class='control-label'>Hạn đăng kí</label>

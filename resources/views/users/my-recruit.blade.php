@@ -22,7 +22,7 @@
 					<td>
 						<a href="/job-detail/{{ $recruit->id }}"><span class="label label-success">Chi tiết</span></a>
 						<a href="/user-apply/{{ $recruit->id }}"><span class="label label-primary">Xem ứng viên</span></a>
-						<span class="label label-warning delete" id="{{ $recruit->id }}" style="cursor:pointer" onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</span>
+						<span class="label label-warning delete" id="{{ $recruit->id }}" style="cursor:pointer" onclick="deletePost({{ $recruit->id }})">Xóa</span>
 					</td>
 				</tr>
 				@endforeach
@@ -46,10 +46,9 @@
 </section>
 <!-- Find Job Section End -->
 <script type="text/javascript" src="user_assets/js/jquery-min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('.delete').click(function(event) {
-			/* Act on the event */
+<script type="text/javascript">
+	function deletePost(id) {
+		if (confirm("Bạn có chắc chắn muốn xóa") == true) {
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -58,15 +57,14 @@
 			$.ajax({
 				'url': '/delete-recruit',
 				'type': 'delete',
-				'data': {'idJob': $(this).attr('id')},
+				'data': {'idJob': id},
 				success:function(data){
 					if(data.message == true){
 						$('#tr'+data.idJob).remove();
 					}
-
 				}
 			})
-		});  
-	});
+		}
+	}
 </script>
 @endsection
