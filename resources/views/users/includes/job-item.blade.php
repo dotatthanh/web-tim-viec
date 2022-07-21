@@ -2,13 +2,13 @@
     <div class="col-md-12">
         <div class="job-list">
             <div class="thumb">
-                <a href="job-detail/{{ $value->job_detail_id }}">
+                <a href="job-detail/{{ $value->id }}">
                     <img src="{{ $value->company->logo }}" alt="" class="image-100-100">
                 </a>
             </div>
             <div class="job-list-content">
                 <h4>
-                    <a href="job-detail/{{ $value->job_detail_id }}">{{ $value->title }}</a>
+                    <a href="job-detail/{{ $value->id }}">{{ $value->title }}</a>
                 </h4>
                 <p>{{ $value->description }}</p>
                 <div class="job-tag">
