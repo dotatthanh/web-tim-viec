@@ -16,6 +16,7 @@ class AddColumnToSearchsTable extends Migration
         Schema::table('searchs', function (Blueprint $table) {
             $table->string('salary')->nullable()->after('address');
             $table->string('experience')->nullable()->after('salary');
+            $table->integer('user_id')->nullable()->after('id');
         });
     }
 
@@ -29,6 +30,7 @@ class AddColumnToSearchsTable extends Migration
         Schema::table('searchs', function (Blueprint $table) {
             $table->dropColumn('salary');
             $table->dropColumn('experience');
+            $table->dropColumn('user_id');
         });
     }
 }

@@ -350,7 +350,7 @@ class UserController extends Controller
 
 	public function jobSuggestBySearch() {
 		$jobs = JobSummary::query();
-		$dataSearch = Search::where('user_id', null)->orderBy('id', 'desc')->limit(5)->get();
+		$dataSearch = Search::where('user_id', null)->orderBy('id', 'desc')->limit(1)->get();
 		$arrIds = [];
 		$tmp = [];
 		$user = auth()->user();
