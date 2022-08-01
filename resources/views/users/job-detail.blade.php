@@ -48,6 +48,8 @@
 										Nam
 									@elseif ($jobSummary->detail->gender == 2)
 										Nữ
+									@else
+										Không yêu cầu
 									@endif
 								</span></div>
 								<div class="col-sm-6" ><b>Bằng cấp: </b><span>{{ $jobSummary->detail->education}}</span></div>

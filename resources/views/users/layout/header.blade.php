@@ -45,7 +45,7 @@
                                     Công việc
                                     <i class="fa fa-angle"></i>
                                 </a>
-                                <ul class="rd-menu rd-navbar-megamenu" style="width:900px">
+                                <ul class="rd-menu rd-navbar-megamenu" style="width: 900px; display: flex; flex-flow: row wrap;">
                                     @if(isset($listCategory))
                                     @foreach ($listCategory as $value)
                                     {{-- expr --}}
@@ -250,6 +250,7 @@
                                                     <i class="ti-list" name=""></i>
                                                     <select name="experience" id="experience" class="form-control">
                                                         <option value="">Chọn kinh nghiệm</option>
+                                                        <option value="Không yêu cầu kinh nghiệm">Không yêu cầu kinh nghiệm</option>
                                                         <option value="1 năm">1 năm</option>
                                                         <option value="2 năm">2 năm</option>
                                                         <option value="3 năm">3 năm</option>

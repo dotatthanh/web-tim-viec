@@ -11,7 +11,7 @@
 			<div class="col-md-12">
 				<div class="job-list">
 					<div class="thumb">
-						<a href="job-details.html">
+						<a href="job-detail/{{ $value->job_detail_id }}">
 							<img src="{{ $value->company->logo }}" alt="" class="image-100-100">
 						</a>
 					</div>
