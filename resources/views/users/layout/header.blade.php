@@ -239,6 +239,7 @@
                                                         <option value="7 – 10 triệu">7 – 10 triệu</option>
                                                         <option value="10 – 15 triệu">10 – 15 triệu</option>
                                                         <option value="15 – 20 triệu">15 – 20 triệu</option>
+                                                        <option value="> 20triệu">> 20triệu</option>
                                                     </select>
                                                 </div>
                                             </div>

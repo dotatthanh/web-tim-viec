@@ -78,6 +78,11 @@ class JobController extends Controller
 						$query->whereIn('salary', ['15000000', '20000000']);
 					});
 				break;
+				case "> 20triệu":
+					$jobs = $jobs->whereHas('detail', function ($query) use($request) {
+						$query->where('salary', '>', '20000000');
+					});
+				break;
 				default:
 			}
 		}
