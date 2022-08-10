@@ -105,7 +105,7 @@
       </div>
       <div class="form-group required col-xs-12 col-sm-6">
         <label for="exampleInputPassword1" class='control-label'>Lương</label>
-        <input type="text" class="form-control" id="salary" name="salary" min=0 required>
+        <input type="number" class="form-control" id="salary" name="salary" min="0" required>
       </div>
       <div class="form-group required col-xs-12 col-sm-4">
         <label for="exampleInputPassword1" class='control-label'>Giới tính</label>

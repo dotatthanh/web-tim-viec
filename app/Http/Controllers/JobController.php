@@ -62,9 +62,24 @@ class JobController extends Controller
 		}
 
 		if (isset($request->salary)) {
-			$jobs = $jobs->whereHas('detail', function ($query) use($request) {
-				$query->where('salary', 'like', '%'.$request->salary.'%');
-			});
+			switch ($request->salary) {
+				case "7 – 10 triệu":
+					$jobs = $jobs->whereHas('detail', function ($query) use($request) {
+						$query->whereIn('salary', ['7000000', '10000000']);
+					});
+				break;
+				case "10 – 15 triệu":
+					$jobs = $jobs->whereHas('detail', function ($query) use($request) {
+						$query->whereIn('salary', ['10000000', '15000000']);
+					});
+				break;
+				case "15 – 20 triệu":
+					$jobs = $jobs->whereHas('detail', function ($query) use($request) {
+						$query->whereIn('salary', ['15000000', '20000000']);
+					});
+				break;
+				default:
+			}
 		}
 
 		if (isset($request->experience)) {
