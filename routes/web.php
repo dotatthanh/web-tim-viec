@@ -59,6 +59,10 @@ Route::post('/signup-company', 'CompanyController@signupCompany')->name('signupC
 
 Route::post('/add-job','JobController@addJob')->name('addJob');
 
+Route::get('/edit-job/{id}','JobController@editJob')->name('editJob');
+
+Route::put('/update-job/{id}','JobController@updateJob')->name('updateJob');
+
 Route::post('/send-cv','UserApplyController@sendCV')->name('sendCV');
 
 Route::get('/my-recruit','UserController@getRecruit')->name('my-recruit')->middleware('recuiter');

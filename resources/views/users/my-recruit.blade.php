@@ -5,6 +5,13 @@
 
 <section class="find-job section">
 	<div class="container">
+		@if (session('alert-success'))
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close btn" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			{{ session('alert-success') }}
+		</div>
+		@endif
+
 		<h2 class="section-title">Danh sách tin tuyển dụng của bạn</h2>
 		<table class="table table-hover" style="width: 100%;">
 			<thead>
@@ -21,8 +28,9 @@
 					<td>{{ $recruit->title }}</td>
 					<td>
 						<a href="/job-detail/{{ $recruit->id }}"><span class="label label-success">Chi tiết</span></a>
+						<a href="/edit-job/{{ $recruit->id }}"><span class="label label-warning">Sửa</span></a>
 						<a href="/user-apply/{{ $recruit->id }}"><span class="label label-primary">Xem ứng viên</span></a>
-						<span class="label label-warning delete" id="{{ $recruit->id }}" style="cursor:pointer" onclick="deletePost({{ $recruit->id }})">Xóa</span>
+						<span class="label label-danger delete" id="{{ $recruit->id }}" style="cursor:pointer" onclick="deletePost({{ $recruit->id }})">Xóa</span>
 					</td>
 				</tr>
 				@endforeach

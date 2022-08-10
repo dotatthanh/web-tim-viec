@@ -132,40 +132,100 @@ class JobController extends Controller
 	}
 
 	public function addJob(Request $request){
-		$jobSummary = new JobSummary;
-		$jobDetail = new JobDetail;
+		try {
+            DB::beginTransaction();
+            
+            $jobSummary = new JobSummary;
+            $jobDetail = new JobDetail;
 
-		$jobDetail->salary = $request->salary;
-		$jobDetail->experience = $request->experience;
-		$jobDetail->education = $request->education;
-		$jobDetail->quantity = $request->quantity;
-		$jobDetail->position = $request->position;
-		$jobDetail->gender = $request->gender;
-		$jobDetail->age = $request->age;
-		$jobDetail->expiration_date = date('d/m/Y', strtotime($request->date));
-		$jobDetail->job_description = $request->detail;
-		$jobDetail->benefit = $request->benefit;
-		$jobDetail->other_requirement = $request->other_requirement;
-		$jobDetail->save();
+            $jobDetail->salary = $request->salary;
+            $jobDetail->experience = $request->experience;
+            $jobDetail->education = $request->education;
+            $jobDetail->quantity = $request->quantity;
+            $jobDetail->position = $request->position;
+            $jobDetail->gender = $request->gender;
+            $jobDetail->age = $request->age;
+            $jobDetail->expiration_date = date('d/m/Y', strtotime($request->date));
+            $jobDetail->job_description = $request->detail;
+            $jobDetail->benefit = $request->benefit;
+            $jobDetail->other_requirement = $request->other_requirement;
+            $jobDetail->save();
 
-		$jobSummary->title = $request->title;
-		$jobSummary->description = $request->description;
-		$jobSummary->category_id = $request->category_id;
-		$jobSummary->company_id = Auth::user()->company_id;
-		$jobSummary->address_id = $request->address_id;
-		$jobSummary->user_id = Auth::user()->id;
-		$jobSummary->job_detail_id = $jobDetail->id;
-		$jobSummary->save();
+            $jobSummary->title = $request->title;
+            $jobSummary->description = $request->description;
+            $jobSummary->category_id = $request->category_id;
+            $jobSummary->company_id = Auth::user()->company_id;
+            $jobSummary->address_id = $request->address_id;
+            $jobSummary->user_id = Auth::user()->id;
+            $jobSummary->job_detail_id = $jobDetail->id;
+            $jobSummary->save();
 
-		// Get the new job of the information 
-		$jobCate = Category::find($jobSummary->category_id);
-		$jobCompany = Company::find($jobSummary->company_id);
-		$jobSalary = $jobDetail->salary;
-		$jobAddress = Address::find($jobSummary->address_id);
-		$jobInfo = array('category' => $jobCate->name, 'company' => $jobCompany->name, 'salary' => $jobSalary, 'address' => $jobAddress->name, 'id' => $jobDetail->id);
-		$this->sendMail($jobInfo);
+			// Get the new job of the information 
+            $jobCate = Category::find($jobSummary->category_id);
+            $jobCompany = Company::find($jobSummary->company_id);
+            $jobSalary = $jobDetail->salary;
+            $jobAddress = Address::find($jobSummary->address_id);
+            $jobInfo = array('category' => $jobCate->name, 'company' => $jobCompany->name, 'salary' => $jobSalary, 'address' => $jobAddress->name, 'id' => $jobDetail->id);
+            $this->sendMail($jobInfo);
 
-		return response()->json(["error"=>false]);
+
+            DB::commit();
+            return redirect()->route('my-recruit')->with('alert-success', 'Thêm tin tuyển dụng thành công!');
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('alert-error','Thêm tin tuyển dụng thất bại!');
+        }
+	}
+
+	public function editJob($id){
+		$listCategory = Category::all();
+		$listAddress = Address::all();
+		$job_summary = JobSummary::find($id);
+
+		$data = [
+			'listCategory' => $listCategory,
+			'job_summary' => $job_summary,
+			'listAddress' => $listAddress
+		];
+
+		return view('users.edit-job', $data);
+	}
+
+	public function updateJob(Request $request, $id){
+		try {
+            DB::beginTransaction();
+            
+            $jobSummary = JobSummary::find($id);
+            $jobDetail = JobDetail::find($jobSummary->job_detail_id);
+
+            $jobDetail->salary = $request->salary;
+            $jobDetail->experience = $request->experience;
+            $jobDetail->education = $request->education;
+            $jobDetail->quantity = $request->quantity;
+            $jobDetail->position = $request->position;
+            $jobDetail->gender = $request->gender;
+            $jobDetail->age = $request->age;
+            $jobDetail->expiration_date = date('d/m/Y', strtotime($request->date));
+            $jobDetail->job_description = $request->detail;
+            $jobDetail->benefit = $request->benefit;
+            $jobDetail->other_requirement = $request->other_requirement;
+            $jobDetail->save();
+
+            $jobSummary->title = $request->title;
+            $jobSummary->description = $request->description;
+            $jobSummary->category_id = $request->category_id;
+            $jobSummary->company_id = Auth::user()->company_id;
+            $jobSummary->address_id = $request->address_id;
+            $jobSummary->user_id = Auth::user()->id;
+            $jobSummary->job_detail_id = $jobDetail->id;
+            $jobSummary->save();
+
+            DB::commit();
+            return redirect()->route('my-recruit')->with('alert-success', 'Cập nhật tin tuyển dụng thành công!');
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('alert-error','Cập nhật tin tuyển dụng thất bại!');
+        }
 	}
 
 	public function saveDataSearch($params) {
