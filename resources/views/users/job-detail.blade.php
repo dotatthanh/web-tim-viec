@@ -33,7 +33,11 @@
 								<b>Hạn nộp hồ sơ: </b> <span >{{ $jobSummary->detail->expiration_date }}</span><br>
 								<b>Lĩnh vực: </b><a href="/category/{{$jobSummary->category->id}}"> <span >{{ $jobSummary->category->name}}</span></a><br>
 								<div>
-									@if ((Auth::check()) && (Auth::user()->role->id == 3))
+									@php
+										$expiration_date = strtotime(\DateTime::createFromFormat('d/m/Y', $jobSummary->detail->expiration_date)->format('Y-m-d'));
+										$today = strtotime(date('Y-m-d'))
+									@endphp
+									@if (Auth::check() && Auth::user()->role->id == 3 && $expiration_date > $today)
 									<a data-toggle="modal" href='#modal_cv' class="btn btn-info"><i class="ti-bookmark"></i> Ứng tuyển ngay</a> 
 									@endif
 								</div>
