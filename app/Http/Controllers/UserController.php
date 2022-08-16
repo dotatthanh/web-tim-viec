@@ -357,39 +357,33 @@ class UserController extends Controller
 
 		if ($user && $user->status == 1) { // Dang tim viec
 			$dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->limit(1)->get();
-			// $jobSuggestByProfile = JobSummary::where('title', 'like', '%' . $user->career . '%')
-			// 	->orderBy('id', 'desc')
-			// 	->take(5)
-			// 	->get();
-
-			// foreach ($jobSuggestByProfile as $item) {
-			// 	$arrIds[] = $item->id;
-			// }
 		}
 
 		if ($dataSearch->count() > 0) {
 			foreach ($dataSearch as $item) {
 				// Search theo công ty
-				if (isset($item->company)) {
+				if ($user && $user->status == 1 && isset($item->company)) {
 					$jobs = $jobs->whereHas('company', function ($query) use($item) {
 						$query->where('name', 'like', '%'.$item->company_name.'%');
 					});
 				}
 			
 				// Search theo nghề
-				if ($user && $user->status == 1) {
-					$jobs = $jobs->where('category_id', $user->profile->category_id);
-				}
-				elseif ($user && $user->status == 1 && isset($item->category)) {
+				// if ($user && $user->status == 1) {
+				// 	$jobs = $jobs->where('category_id', $user->profile->category_id);
+				// }
+				// else
+				if ($user && $user->status == 1 && isset($item->category)) {
 					$jobs = $jobs->where('category_id', $item->category);
 				}
 				
 				
 				// Search theo địa chỉ
-				if ($user && $user->status == 1) {
-					$jobs = $jobs->where('address_id', $user->profile->address_id);
-				}
-				elseif ($user && $user->status == 1 && isset($item->address)) {
+				// if ($user && $user->status == 1) {
+				// 	$jobs = $jobs->where('address_id', $user->profile->address_id);
+				// }
+				// else
+				if ($user && $user->status == 1 && isset($item->address)) {
 					$jobs = $jobs->where('address_id', $item->address);
 				}
 
@@ -421,12 +415,13 @@ class UserController extends Controller
 				}
 				
 				// Search theo kinh nghiệm
-				if ($user && $user->status == 1) {
-					$jobs = $jobs->whereHas('detail', function ($query) use($user) {
-						$query->where('experience', 'like', '%'.$user->profile->experience.'%');
-					});
-				}
-				elseif ($user && $user->status == 1 && isset($item->experience)) {
+				// if ($user && $user->status == 1) {
+				// 	$jobs = $jobs->whereHas('detail', function ($query) use($user) {
+				// 		$query->where('experience', 'like', '%'.$user->profile->experience.'%');
+				// 	});
+				// }
+				// else
+				if ($user && $user->status == 1 && isset($item->experience)) {
 					$jobs = $jobs->whereHas('detail', function ($query) use($item) {
 						$query->where('experience', 'like', '%'.$item->experience.'%');
 					});
