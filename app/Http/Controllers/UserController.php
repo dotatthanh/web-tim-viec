@@ -372,42 +372,63 @@ class UserController extends Controller
 				// Search theo công ty
 				if (isset($item->company)) {
 					$jobs = $jobs->whereHas('company', function ($query) use($item) {
-						$query->where('name', 'like', '%'.$item->company.'%');
+						$query->where('name', 'like', '%'.$item->company_name.'%');
 					});
 				}
 			
 				// Search theo nghề
-				if ($user && $user->status == 1 && isset($item->category)) {
-					$jobs = $jobs->where('category_id', $item->category);
-				}
-				elseif ($user && $user->status == 1) {
+				if ($user && $user->status == 1) {
 					$jobs = $jobs->where('category_id', $user->profile->category_id);
 				}
+				elseif ($user && $user->status == 1 && isset($item->category)) {
+					$jobs = $jobs->where('category_id', $item->category);
+				}
+				
 				
 				// Search theo địa chỉ
-				if ($user && $user->status == 1 && isset($item->address)) {
-					$jobs = $jobs->where('address_id', $item->address);
-				}
-				elseif ($user && $user->status == 1) {
+				if ($user && $user->status == 1) {
 					$jobs = $jobs->where('address_id', $user->profile->address_id);
+				}
+				elseif ($user && $user->status == 1 && isset($item->address)) {
+					$jobs = $jobs->where('address_id', $item->address);
 				}
 
 				// Search theo mức lương
 				if (isset($item->salary)) {
-					$jobs = $jobs->whereHas('detail', function ($query) use($item) {
-						$query->where('salary', 'like', '%'.$item->salary.'%');
-					});
+					switch ($item->salary) {
+						case "7 – 10 triệu":
+							$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+								$query->whereIn('salary', ['7000000', '10000000']);
+							});
+						break;
+						case "10 – 15 triệu":
+							$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+								$query->whereIn('salary', ['10000000', '15000000']);
+							});
+						break;
+						case "15 – 20 triệu":
+							$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+								$query->whereIn('salary', ['15000000', '20000000']);
+							});
+						break;
+						case "> 20triệu":
+							$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+								$query->where('salary', '>', '20000000');
+							});
+						break;
+						default:
+					}
 				}
 				
 				// Search theo kinh nghiệm
-				if ($user && $user->status == 1 && isset($item->experience)) {
-					$jobs = $jobs->whereHas('detail', function ($query) use($item) {
-						$query->where('experience', 'like', '%'.$item->experience.'%');
-					});
-				}
-				elseif ($user && $user->status == 1) {
+				if ($user && $user->status == 1) {
 					$jobs = $jobs->whereHas('detail', function ($query) use($user) {
 						$query->where('experience', 'like', '%'.$user->profile->experience.'%');
+					});
+				}
+				elseif ($user && $user->status == 1 && isset($item->experience)) {
+					$jobs = $jobs->whereHas('detail', function ($query) use($item) {
+						$query->where('experience', 'like', '%'.$item->experience.'%');
 					});
 				}
 			}
