@@ -359,10 +359,11 @@ class UserController extends Controller
 			$dataSearch = Search::where('user_id', $user->id)->orderBy('id', 'desc')->limit(1)->get();
 		}
 
+
 		if ($dataSearch->count() > 0) {
 			foreach ($dataSearch as $item) {
 				// Search theo công ty
-				if ($user && $user->status == 1 && isset($item->company)) {
+				if ($user && $user->status == 1 && isset($item->company_name)) {
 					$jobs = $jobs->whereHas('company', function ($query) use($item) {
 						$query->where('name', 'like', '%'.$item->company_name.'%');
 					});
@@ -388,7 +389,7 @@ class UserController extends Controller
 				}
 
 				// Search theo mức lương
-				if (isset($item->salary)) {
+				if ($user && $user->status == 1 && isset($item->salary)) {
 					switch ($item->salary) {
 						case "7 – 10 triệu":
 							$jobs = $jobs->whereHas('detail', function ($query) use($item) {
