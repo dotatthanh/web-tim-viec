@@ -51,6 +51,8 @@ Route::post('/favorite','JobFavoriteController@addJobFavorite');
 
 Route::get('/list-favorite', 'JobFavoriteController@listFavorite')->name('list-favorite');
 
+Route::get('/list-job-applied', 'JobApplyController@listJobApplied')->name('list-job-applied');
+
 Route::delete('/delete-job-favorite','JobFavoriteController@deleteJobFavorite');
 
 Route::get('/form-post-job','JobController@showPostJob')->name('form-post-job')->middleware('recuiter');

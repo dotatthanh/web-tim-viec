@@ -10,7 +10,6 @@ use App\JobSummary;
 use App\Category;
 use App\JobFavorite;
 
-
 class JobFavoriteController extends Controller
 {
 	public function addJobFavorite(Request $request){
@@ -36,7 +35,7 @@ class JobFavoriteController extends Controller
 	public function listFavorite(){
 		$listCategory = Category::all();
 		$listAddress = Address::all();
-		$user = User::find(Auth::user()->id);
+		$user = Auth::user();
 		$listJob = $user->jobFavorite()->paginate(5);
 		return view('users.list-favorite',['listCategory'=>$listCategory,'listAddress'=>$listAddress,'listJob'=>$listJob]);
 	}

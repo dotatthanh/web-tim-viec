@@ -24,7 +24,6 @@ class AddressSeeder extends Seeder
         	['name'=>'Thanh Hóa'],
         	['name'=>'Điện Biên'],
         	['name'=>'Nghệ An'],
-            
         ]);
     }
 }

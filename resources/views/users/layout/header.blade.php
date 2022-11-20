@@ -110,6 +110,11 @@
                                             Yêu thích
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('list-job-applied') }}">
+                                            CV ứng tuyển
+                                        </a>
+                                    </li>
                                     @endif
                                     @if (Auth::user()->role_id == 1)
                                     <li>

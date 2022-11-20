@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function jobApply(){
-        return $this->belongsToMany('App\JobSummary', 'cv_apply', 'job_summary_id', 'user_id');
+        return $this->belongsToMany('App\JobSummary', 'cv_apply', 'user_id', 'job_summary_id');
     }
 
     public function getCV(){

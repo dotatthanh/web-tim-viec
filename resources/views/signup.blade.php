@@ -75,12 +75,12 @@
 
                     <section>      
                         <h1 class="entry-title"><span>Đăng kí</span> </h1>
-                        <div class="alert alert-success " id="alert_success" role="alert">
+                        {{-- <div class="alert alert-success " id="alert_success" role="alert">
                             Đăng kí thành công <a href="{{ route('login') }}" class="alert-link">Đăng nhập ngay</a>. 
                         </div>
                         <div class="alert alert-danger " id="alert_danger" role="alert">
                             Đăng kí thất bại. <span id="error"></span>. 
-                        </div>
+                        </div> --}}
                         <hr>
                         <form class="form-horizontal" name="signup" id="signup" >
 
@@ -253,6 +253,8 @@
             </div>
         </section>
         <script type="text/javascript" src="user_assets/js/jquery-min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         <script>
             $(document).ready(function() {
                 $('input[type="radio"]').click(function(){

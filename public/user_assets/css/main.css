@@ -1145,7 +1145,7 @@ label {
     color: #fff;
 }
 .find-job table td {
-    line-height: 78px !important;
+    /*line-height: 78px !important;*/
     font-size: 14px;
     font-weight: 700;
 }

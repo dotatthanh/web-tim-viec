@@ -9,16 +9,16 @@
 		<table class="table table-hover" style="width: 100%;">
 			<thead>
 				<tr>
-					<th style="width: 5%">ID</th>
+					<th style="width: 5%">STT</th>
 					<th style="width: 45%">Tiêu đề</th>
 					<th style="width: 35%">Tên công ty</th>
 					<th style="width: 15%">Hành động</th>
 				</tr>
 			</thead>
 			<tbody>
-				@foreach ($listJob as $favorite)
-				<tr id="tr{{ $favorite->id }}">{{-- expr --}}
-					<td>{{ $favorite->id }}</td>
+				@foreach ($listJob as $key => $favorite)
+				<tr id="tr{{ $favorite->id }}">
+					<td>{{ $key+1 }}</td>
 					<td>{{ $favorite->title }}</td>
 					<td>{{ $favorite->company->name }}</td>
 					<td>

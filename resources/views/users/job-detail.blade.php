@@ -18,12 +18,12 @@
 					<div class="job-list-content">
 						@if (isset($jobSummary))
 						{{-- expr --}}
-						<div class="alert alert-success " id="alert_success_cv" role="alert" >
+						{{-- <div class="alert alert-success " id="alert_success_cv" role="alert" >
 							Gửi CV thành công. 
 						</div>
 						<div class="alert alert-danger " id="alert_danger_cv" role="alert">
 							Gửi CV thất bại.
-						</div>
+						</div> --}}
 						<h4>
 							<a href="" >{{ $jobSummary->title }}</a><br>
 							<i class="ti-briefcase"></i><a href="{{ $jobSummary->company->link }}" style="color: blue">  {{ $jobSummary->company->name }}</a><br>
@@ -34,8 +34,11 @@
 								<b>Lĩnh vực: </b><a href="/category/{{$jobSummary->category->id}}"> <span >{{ $jobSummary->category->name}}</span></a><br>
 								<div>
 									@php
-										$expiration_date = strtotime(\DateTime::createFromFormat('d/m/Y', $jobSummary->detail->expiration_date)->format('Y-m-d'));
-										$today = strtotime(date('Y-m-d'))
+										$expiration_date = 0;
+										if ($jobSummary->detail->expiration_date) {
+											$expiration_date = strtotime(\DateTime::createFromFormat('d/m/Y', $jobSummary->detail->expiration_date)->format('Y-m-d'));
+										}
+										$today = strtotime(date('Y-m-d'));
 									@endphp
 									@if (Auth::check() && Auth::user()->role->id == 3 && $expiration_date > $today)
 									<a data-toggle="modal" href='#modal_cv' class="btn btn-info"><i class="ti-bookmark"></i> Ứng tuyển ngay</a> 
@@ -133,6 +136,7 @@
 				</div>
 
 				<script type="text/javascript" src="user_assets/js/jquery-min.js"></script>   
+				<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 				<script>
 					
 					$(document).ready(function() {
@@ -156,26 +160,49 @@
 								processData : false,
 								contentType : false,
 								success:function(data){
-									console.log(data);
 									if(data.error == false){
-										$('#alert_success_cv').show();
-										$('#alert_danger_cv').hide();
+										// $('#alert_success_cv').show();
+										swal({
+											title: "Thông báo!",
+											text: "Gửi CV thành công!",
+											icon: "success",
+											button: "Xác nhận",
+										})
+										.then((confirmed) => {
+											if (confirmed) {
+												window.location.href = '/login';
+											}
+										});
+										// $('#alert_danger_cv').hide();
 										
 										$('#modal_cv').modal('hide');
 									}
 									else{
 										if (data.message.cvExist != undefined) {
-											$('#alert_danger_cv').text(data.message.cvExist[0]);
-											$('#alert_danger_cv').show();
-											$('#alert_success_cv').hide();
+											// $('#alert_danger_cv').text();
+											// $('#alert_danger_cv').show();
+
+											swal({
+												title: "Thông báo!",
+												text: data.message.cvExist[0],
+												icon: "error",
+												button: "Đóng",
+											});
+											// $('#alert_success_cv').hide();
 											$('#modal_cv').modal('hide');
 										}
 									}
 								},
 
 								error:function(data){
-									$('#alert_danger_cv').show();
-									$('#alert_success_cv').hide();
+									// $('#alert_danger_cv').show();
+									swal({
+										title: "Thông báo!",
+										text: "Gửi CV thất bại!",
+										icon: "error",
+										button: "Đóng",
+									});
+									// $('#alert_success_cv').hide();
 									$('#modal_cv').modal('hide');
 								},
 							})

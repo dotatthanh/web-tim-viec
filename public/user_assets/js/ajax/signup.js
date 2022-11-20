@@ -32,44 +32,60 @@ $(document).ready(function(){
 			},
 			success:function(data){
 				if (data.error == true) {
-					$('#alert_danger').show();
-					$('#alert_success').hide();
+					var error;
+					// $('#alert_danger').show();
+					// $('#alert_success').hide();
+
 					if(data.message.fullName != undefined){
-						$('#error').text(data.message.fullName[0]);
+						error = data.message.fullName[0];
 					}
 					else if (data.message.email != undefined) {
-						$('#error').text(data.message.email[0]);
+						error = data.message.email[0];
 					}
 					else if (data.message.password != undefined) {
-						$('#error').text(data.message.password[0]);
+						error = data.message.password[0];
 					}
 					else if (data.message.cpassword != undefined) {
-						$('#error').text(data.message.cpassword[0]);
+						error = data.message.cpassword[0];
 					}
 					else if(data.message.errorCompany != undefined){
-						$('#error').text(data.message.errorCompany[0]);
+						error = data.message.errorCompany[0];
 					}
-
-
 					else if(data.message.errorCategory != undefined){
-						$('#error').text(data.message.errorCategory[0]);
+						error = data.message.errorCategory[0];
 					}
 					else if(data.message.errorAddress != undefined){
-						$('#error').text(data.message.errorAddress[0]);
+						error = data.message.errorAddress[0];
 					}
 					else if(data.message.errorExperience != undefined){
-						$('#error').text(data.message.errorExperience[0]);
+						error = data.message.errorExperience[0];
 					}
 					else if(data.message.errorEducation != undefined){
-						$('#error').text(data.message.errorEducation[0]);
+						error = data.message.errorEducation[0];
 					}
 					else if(data.message.errorAge != undefined){
-						$('#error').text(data.message.errorAge[0]);
+						error = data.message.errorAge[0];
 					}
+
+					swal({
+						title: "Thông báo!",
+						text: "Đăng kí thất bại. " + error,
+						icon: "error",
+						button: "Đóng",
+					});
 				} 
 				else {
-					$('#alert_success').show();
-					$('#alert_danger').hide();
+					swal({
+						title: "Thông báo!",
+						text: "Đăng kí thành công! Hệ thống sẽ chuyển tới trang Đăng nhập",
+						icon: "success",
+						button: "Xác nhận",
+					})
+					.then((confirmed) => {
+						if (confirmed) {
+							window.location.href = '/login';
+						}
+					});
 				}
 			}
 		});
