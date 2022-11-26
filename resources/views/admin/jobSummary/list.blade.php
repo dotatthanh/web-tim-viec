@@ -28,13 +28,13 @@
                                     <td>{{ $job->title }}</td>
                                     <td>{{ $job->category->name}}</td>
                                     <td>{{ $job->user->name}}</td>
-                                    <td class="center"><form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST">
-                                @csrf
-                                    <input id="delete" type="submit" name="Delete" class="btn btn-danger" value="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa')">
-                                </form>
-                                    <a href="/job-detail/{{ $job->id }}" class="btn-info">Chi tiết</a>
-                                </td>
-                                    
+                                    <td class="center">
+                                        <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST">
+                                            @csrf
+                                            <input id="delete" type="button" name="Delete" class="btn btn-danger" value="Xóa" onclick="deleteConfirm($(this))">
+                                        </form>
+                                        <a href="/job-detail/{{ $job->id }}" class="btn-info">Chi tiết</a>
+                                    </td>
                                 </tr>
                             
                             @endforeach

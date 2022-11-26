@@ -7,14 +7,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Admin</a>
+        <a class="navbar-brand" href="{{ route('admin.users') }}">Admin</a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
         <!-- /.dropdown -->
         <li class="dropdown">
-            <a href="{{ route('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Thoát</a>  
+            <a href="{{ route('home') }}"><i class="fa fa-sign-out fa-fw"></i> Thoát</a>  
         </li>
         <!-- /.dropdown -->
     </ul>

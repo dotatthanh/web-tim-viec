@@ -8,11 +8,11 @@
     <base href="{{asset('')}}">
 
 
-    <link rel="icon" type="image/vnd.microsoft.icon" href="http://vevs.website/vgw09602_awsoo_com/app/web/upload/medium/favicon-346.ico">
+    {{-- <link rel="icon" type="image/vnd.microsoft.icon" href="http://vevs.website/vgw09602_awsoo_com/app/web/upload/medium/favicon-346.ico">
     <link rel="stylesheet" href="http://vevs.website/vgw09602_awsoo_com/core/third-party/flexslider/2.7.0/flexslider.css">
     <link rel="stylesheet" href="http://vevs.website/vgw09602_awsoo_com/core/third-party/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://vevs.website/vgw09602_awsoo_com/templates/template_1/css/style.min.css">
-    <link rel="stylesheet" href="http://vevs.website/vgw09602_awsoo_com/templates/template_1/css/themes/theme1.min.css">
+    <link rel="stylesheet" href="http://vevs.website/vgw09602_awsoo_com/templates/template_1/css/themes/theme1.min.css"> --}}
     <link rel="stylesheet" href="user_assets/css/signup.css" type="text/css">
 
     <!-- Favicon -->
@@ -73,12 +73,12 @@
                     <!--thông báo-->
                     <section>      
                         <h1 class="entry-title"><span>Chỉnh sửa thông tin</span> </h1>
-                        <div class="alert alert-success " id="alert_success" role="alert" style="width: 84%; margin: 0 auto">
+                        {{-- <div class="alert alert-success " id="alert_success" role="alert" style="width: 84%; margin: 0 auto">
                             Chỉnh sửa thông tin thành công. 
                         </div>
                         <div class="alert alert-danger " id="alert_danger" role="alert">
                             Chỉnh sửa thông tin thất bại. <span id="error"></span>. 
-                        </div>
+                        </div> --}}
                         <hr>
                         <form class="form-horizontal" name="signup" id="signup" >
                             <div class="form-group">
@@ -237,7 +237,7 @@
     <label class="control-label col-md-3">Công ty<span class="text-danger">*</span></label>
     <div class="col-md-6">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        <select name="company_id" class="form-control" id="company_id">
+        <select name="company_id" class="form-control" id="company_id" style="padding-left: 35px;">
             <option value="0">------------------Công ty----------------</option>
             @foreach ($listCompany as $c)
             <option value="{{ $c->id }}" @if (Auth::user()->company_id == $c->id) selected @endif>{{ $c->name }}</option>
@@ -305,9 +305,10 @@
 </div>
 </section>
 <script type="text/javascript" src="user_assets/js/jquery-min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(document).ready(function() {
-        console.log($('input[name="role"]:checked').val());
+        // console.log($('input[name="role"]:checked').val());
         if ($('input[name="role"]:checked').val() == 2) {
             $('#select_list_company').show();
             $('#profile').hide();
@@ -398,46 +399,55 @@
                     'education':$('input[name="education"]').val(),
                     'sex':$('input[name="sex"]:checked').val(),
                     'age':$('input[name="age"]').val(),
-                    },
+                },
                 success:function(data){
                     if (data.error == true) {
-                        $('#alert_danger').show();
-                        $('#alert_success').hide();
+                        var error;
                         if(data.message.fullName != undefined){
-                            $('#error').text(data.message.fullName[0]);
+                            error = data.message.fullName[0];
                         }
                         if(data.message.category_id != undefined){
-                          $('#error').text(data.message.category_id[0]);
+                          error = data.message.category_id[0];
                         }
                         if(data.message.address_id != undefined){
-                          $('#error').text(data.message.address_id[0]);
+                          error = data.message.address_id[0];
                         }
                         if(data.message.experience != undefined){
-                          $('#error').text(data.message.experience[0]);
+                          error = data.message.experience[0];
                         }
                         if(data.message.education != undefined){
-                          $('#error').text(data.message.education[0]);
+                          error = data.message.education[0];
                         }
                         if(data.message.age != undefined){
-                          $('#error').text(data.message.age[0]);
+                          error = data.message.age[0];
                         }
-
                         else if (data.message.password != undefined) {
-                            $('#error').text(data.message.password[0]);
+                            error = data.message.password[0];
                         }
                         else if (data.message.cpassword != undefined) {
-                            $('#error').text(data.message.cpassword[0]);
+                            error = data.message.cpassword[0];
                         }
                         else if (data.message.errorEmail != undefined) {
-                            $('#error').text(data.message.errorEmail[0]);
+                            error = data.message.errorEmail[0];
                         }
                         else if(data.message.errorCompany != undefined){
-                            $('#error').text(data.message.errorCompany[0]);
+                            error = data.message.errorCompany[0];
                         }
+
+                        swal({
+                            title: "Thông báo!",
+                            text: "Chỉnh sửa thông tin thất bại. " + error,
+                            icon: "error",
+                            button: "Đóng",
+                        });
                     } 
                     else {
-                        $('#alert_success').show();
-                        $('#alert_danger').hide();
+                        swal({
+                            title: "Thông báo!",
+                            text: "Chỉnh sửa thông tin thành công.",
+                            icon: "success",
+                            button: "Xác nhận",
+                        });
                     }
                 }
             });

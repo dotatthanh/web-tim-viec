@@ -153,10 +153,10 @@
                                         @endif
                                     </button>
                                     @if ($notifications->count() > 0)
-                                    <ul class="dropdown-menu" style="width: 350px">
+                                    <ul class="dropdown-menu" style="width: 350px;">
                                         @foreach ($notifications as $noti)
                                         <li>
-                                            <a href="/user-apply/{{ $noti->data['job_id'] }}" class="text-white">
+                                            <a href="/user-apply/{{ $noti->data['job_id'] }}" class="text-white" style="white-space: normal;">
                                                 {{ $noti->data['message'] }}
                                             </a>
                                         </li>

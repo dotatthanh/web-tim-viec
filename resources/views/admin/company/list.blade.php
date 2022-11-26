@@ -27,11 +27,12 @@
                                 <td>{{ $company->id }}</td>
                                 <td><a href="{{ $company->link }}">{{ $company->name }}</a></td>
                                 <td>{{ $company->address->name }}</td>
-                                <td class="center"><form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST">
-                            @csrf
-                                <input id="delete" type="submit" name="Delete" class="btn btn-danger" value="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa')">
-                                </form></td>
-                                
+                                <td class="center">
+                                    <form action="{{ route('admin.companies.destroy', $company->id) }}" method="POST">
+                                        @csrf
+                                        <input id="delete" type="button" name="Delete" class="btn btn-danger" value="Xóa" onclick="deleteConfirm($(this))">
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                             </tr>

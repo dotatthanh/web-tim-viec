@@ -36,7 +36,7 @@
                             <a href="{{ route('admin.jobs') }}"><i class="fa fa-cube fa-fw"></i> Công việc
                         </li>
                         <li>
-                            <a href="{{ route('admin.companies') }}"><i class="fas fa-archive"></i> Công ty</a>
+                            <a href="{{ route('admin.companies') }}"><i class="fa fa-archive"></i> Công ty</a>
                             <!-- /.nav-second-level -->
                         </li>
                         

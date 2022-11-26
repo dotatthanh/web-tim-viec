@@ -321,8 +321,12 @@ class UserController extends Controller
 		$user = Auth::user();
 		$user->name = $request->fullName;
 		$user->email = $request->email;
-		$user->role_id = $request->role;
-		$user->status = $request->status;
+		if (isset($request->role)) {
+			$user->role_id = $request->role;
+		}
+		if (isset($request->status)) {
+			$user->status = $request->status;
+		}
 		// $user->career = $request->career;
 		// $user->experience = $request->experience;
 
@@ -335,14 +339,27 @@ class UserController extends Controller
 		$user->update();
 
 		if ($request->role == 3) {
-			$user->profile->update([
-				'category_id' => $request->category_id,
-				'address_id' => $request->address_id,
-				'experience' => $request->experience,
-				'education' => $request->education,
-				'sex' => $request->sex,
-				'age' => $request->age,
-			]);
+			if ($user->profile) {
+				$user->profile->update([
+					'category_id' => $request->category_id,
+					'address_id' => $request->address_id,
+					'experience' => $request->experience,
+					'education' => $request->education,
+					'sex' => $request->sex,
+					'age' => $request->age,
+				]);
+			}
+			else {
+				Profile::create([
+					'user_id' => $user->id,
+					'category_id' => $request->category_id,
+					'address_id' => $request->address_id,
+					'experience' => $request->experience,
+					'education' => $request->education,
+					'sex' => $request->sex,
+					'age' => $request->age,
+				]);
+			}
 		}
 
 		return response()->json(['error'=>false]);

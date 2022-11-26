@@ -29,7 +29,7 @@
 							<i class="ti-briefcase"></i><a href="{{ $jobSummary->company->link }}" style="color: blue">  {{ $jobSummary->company->name }}</a><br>
 							<p  class="info-job-basic">
 								<b>Địa điểm: </b> <span >{{ $jobSummary->address->name }}</span><br>
-								<b>Mức lương: </b> <span >{{ $jobSummary->detail->salary }}</span><br>
+								<b>Mức lương: </b> <span >{{ number_format($jobSummary->detail->salary) }} VNĐ</span><br>
 								<b>Hạn nộp hồ sơ: </b> <span >{{ $jobSummary->detail->expiration_date }}</span><br>
 								<b>Lĩnh vực: </b><a href="/category/{{$jobSummary->category->id}}"> <span >{{ $jobSummary->category->name}}</span></a><br>
 								<div>

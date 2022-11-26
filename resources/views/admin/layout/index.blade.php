@@ -54,13 +54,33 @@
     <script src="{{ asset('admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                    responsive: true
+            });
         });
-    });
+
+        function deleteConfirm(obj) {
+            swal({
+                title: "Thông báo!",
+                text: "Bạn có chắc chắn muốn xoá? Lưu ý sẽ xoá các thông tin liên quan.",
+                icon: "warning",
+                buttons: {
+                    ok: "Xoá",
+                    cancel: "Huỷ",
+                },
+
+            })
+            .then((confirmed) => {
+                if (confirmed) {
+                    obj.parent('form').submit();
+                }
+            });
+        }
     </script>
 
     @yield('script')

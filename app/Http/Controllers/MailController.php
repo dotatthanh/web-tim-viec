@@ -38,6 +38,6 @@ class MailController extends Controller
 
     public function replyEmail(Request $request) {
     	ReplyToApplyingUser::dispatch($request->email, $request->content_email);
-    	return redirect()->back()->with('success', 'Successfully!!!');
+    	return redirect()->back()->with('success', 'Thành công!!!');
     }
 }
