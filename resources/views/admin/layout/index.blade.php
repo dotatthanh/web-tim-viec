@@ -66,8 +66,8 @@
 
         function deleteConfirm(obj) {
             swal({
-                title: "Thông báo!",
-                text: "Bạn có chắc chắn muốn xoá? Lưu ý sẽ xoá các thông tin liên quan.",
+                title: "Bạn có chắc chắn muốn xoá?",
+                text: "Lưu ý sẽ xoá các thông tin liên quan.",
                 icon: "warning",
                 buttons: {
                     ok: "Xoá",
