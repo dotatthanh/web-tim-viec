@@ -25,6 +25,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
+                        @if (auth()->user() && auth()->user()->role_id == 3)
                         <div class="icon" id="{{ $value->id }}" @if (Auth::check()) @foreach (Auth::user()->
                             jobFavorite as $favorite)
                             @if ($favorite->id == $value->id)
@@ -35,6 +36,7 @@
                             >
                             <i class="ti-heart"></i>
                         </div>
+                        @endif
                         <a href="job-detail/{{ $value->id }}" class="btn btn-common btn-rm">Xem chi tiết</a>
                     </div>
                 </div>
