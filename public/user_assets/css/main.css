@@ -900,7 +900,7 @@ nav#menu span.fa.fa-bars:hover {
       position: relative;
   }
   .search-container .form-control {
-      padding: 0 40px;
+      padding: 0 15px 0 50px;
       border: 1px solid transparent;
   }
   .search-container .form-group {
@@ -3327,7 +3327,7 @@ blockquote p a:hover {
 }
 .form-group i {
   position: absolute;
-  top: 20px;
+  top: 18px;
   color: #888;
   left: 26px;
   font-size: 18px;

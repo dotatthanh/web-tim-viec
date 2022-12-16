@@ -12,9 +12,9 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('admin.users') }}"><i class="fa fa-users fa-fw"></i> Người dùng</a>
                             <!-- /.nav-second-level -->

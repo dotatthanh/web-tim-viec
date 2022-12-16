@@ -44,8 +44,8 @@
     <!-- Color CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="user_assets/css/colors/red.css" media="screen" />
     <script src="user_assets/js/jquery-min.js"></script>
-    <script src="user_assets/js/bootstrap.min.js"></script>
-    <script src="user_assets/js/ajax/signup.js"></script>
+    {{-- <script src="user_assets/js/bootstrap.min.js"></script>
+    <script src="user_assets/js/ajax/signup.js"></script> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
@@ -211,15 +211,15 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h2 class="modal-title">Thêm mới công ty</h2>
-                                    <div class="alert alert-success " id="alert_success_company" role="alert" >
+                                    {{-- <div class="alert alert-success " id="alert_success_company" role="alert" >
                                         Đăng kí thành công . 
                                     </div>
                                     <div class="alert alert-danger " id="alert_danger_company" role="alert">
                                         Đăng kí thất bại. <span id="error_company"></span>. 
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="modal-body">
-                                    <form action=""  role="form" enctype="multipart/form-data">
+                                    <form action=""  role="form" enctype="multipart/form-data" id="form-add-company">
 
                                         <div class="form-group">
                                             <label for="">Tên công ty</label>
@@ -254,6 +254,8 @@
         </section>
         <script type="text/javascript" src="user_assets/js/jquery-min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="user_assets/js/bootstrap.min.js"></script>
+        <script src="user_assets/js/ajax/signup.js"></script>
 
         <script>
             $(document).ready(function() {
@@ -291,26 +293,39 @@
                         contentType : false,
                         success:function(data){
                             if(data.error == true){
-                                $('#alert_success_company').hide();
-                                $('#alert_danger_company').show();
+                                var error;
+                                // $('#alert_success_company').hide();
+                                // $('#alert_danger_company').show();
                                 if(data.message.nameCompany != undefined){
-                                    $('#error_company').text(data.message.nameCompany[0]);
+                                    error = data.message.nameCompany[0];
                                 }
                                 else if (data.message.linkCompany != undefined) {
-                                    $('#error_company').text(data.message.linkCompany[0]);
+                                    error = data.message.linkCompany[0];
                                 }
                                 else if(data.message.logoCompany != undefined){
-                                    $('#error_company').text(data.message.logoCompany[0]);
+                                    error = data.message.logoCompany[0];
                                 }
                                 else if (data.message.addressCompany != undefined) {
-                                    $('#error_company').text(data.message.addressCompany[0]);
+                                    error = data.message.addressCompany[0];
                                 }
+
+                                swal({
+                                    title: "Thông báo!",
+                                    text: "Đăng kí thất bại. " + error,
+                                    icon: "error",
+                                    button: "Đóng",
+                                });
                             }
                             else{
-                                $('#alert_success_company').show();
-                                $('#alert_danger_company').hide();
+                                $('#modal-id').modal('toggle');
+                                $('#form-add-company').find("input, select").val("");
+                                swal({
+                                    title: "Thông báo!",
+                                    text: "Đăng kí thành công.",
+                                    icon: "success",
+                                    button: "Xác nhận",
+                                })
                                 $("#list_company").append('<option value="'+data.company.id+'">'+data.company.name+'</option>');
-
                             }
 
                         }
