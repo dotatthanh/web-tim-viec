@@ -325,7 +325,7 @@
                                     icon: "success",
                                     button: "Xác nhận",
                                 })
-                                $("#list_company").append('<option value="'+data.company.id+'">'+data.company.name+'</option>');
+                                $("#company_id").append('<option value="'+data.company.id+'">'+data.company.name+'</option>');
                             }
 
                         }
